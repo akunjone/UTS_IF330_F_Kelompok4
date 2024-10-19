@@ -23,13 +23,13 @@ if(!isset($_SESSION['user_name'])){
       .sidebar {
          margin: 0;
          padding: 0;
-         width: 200px;
+         width: 10%;
          background-color: #FCCCB6;
          position: fixed;
          height: 100%;
          overflow: auto;
-         border-top-right-radius:50px;
-         border-bottom-right-radius:50px;
+         border-top-right-radius:20px;
+         border-bottom-right-radius:20px;
       }
 
       .sidebar a {
@@ -50,9 +50,8 @@ if(!isset($_SESSION['user_name'])){
       }
 
       div.container {
-         margin-left: 200px;
+         margin-left: 10%;
          padding: 1px 16px;
-         height: 1000px;
       }
 
       @media screen and (max-width: 700px) {
@@ -75,7 +74,7 @@ if(!isset($_SESSION['user_name'])){
 </head>
 <body>
    <div class="sidebar">
-      <a class="active" href="#user.php">Home</a>
+      <a class="active" href="user.php">Home</a>
       <a href="#">Link 1</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
