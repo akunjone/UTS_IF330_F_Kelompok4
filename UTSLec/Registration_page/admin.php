@@ -72,17 +72,33 @@ if(!isset($_SESSION['admin_name'])){
    </style>
 </head>
 <body>
+   <!-- buat sidebar -->
    <div class="sidebar">
-      <a class="active" href="user.php">Home</a>
+      <a class="active" href="#user.php">Home</a>
       <a href="#">Link 1</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
-   </div> 
+   </div>
    <div class="container">
       <div class="content">
          <h3>hi, <span>admin</span></h3>
          <h1>welcome <span><?php echo $_SESSION['admin_name'] ?></span></h1>
          <p>this is an admin page</p>
+         <?php
+            $events_query = "SELECT * FROM events";
+            $result = $conn->query($events_query);
+
+            //diunjuk dalam bentuk tabel
+            while ($row = $result->fetch_assoc()) {
+               echo "<tr>";
+               echo "<td>" . $row['name'] . "</td>";
+               echo "<td>" . $row['date'] . " " . $row['time'] . "</td>";
+               echo "<td>" . $row['location'] . "</td>";
+               echo "<td>" . $row['status'] . "</td>";
+               echo "<td><a href='edit_event.php?id=" . $row['id'] . "'>Edit</a> | <a href='delete_event.php?id=" . $row['id'] . "'>Delete</a></td>";
+               echo "</tr>";
+            }
+         ?>
          <a href="logout.php" class="btn">logout</a>
       </div>
    </div>

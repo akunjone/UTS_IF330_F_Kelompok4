@@ -84,7 +84,19 @@ if(!isset($_SESSION['user_name'])){
          <h3>hi, <span>user</span></h3>
          <h1>welcome <span><?php echo $_SESSION['user_name'] ?></span></h1>
          <p>this is a user page</p>
-         
+         <?php
+            $upcoming_events_query = "SELECT * FROM events WHERE status = 'open' AND date >= CURDATE()";
+            $result = $conn->query($upcoming_events_query);
+            
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='event'>";
+                echo "<h3>" . $row['name'] . "</h3>";
+                echo "<p>Date: " . $row['date'] . "</p>";
+                echo "<p>Location: " . $row['location'] . "</p>";
+                echo "<a href='register_event.php?id=" . $row['id'] . "'>Register</a>";
+                echo "</div>";
+            }
+         ?>
          <a href="logout.php" class="btn">logout</a>
       </div>
    </div>

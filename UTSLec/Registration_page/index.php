@@ -64,7 +64,7 @@
 <body>
     <div class="container">
         <div class="calendar-icon">📅</div>
-        <h1>Event Booking Calendar</h1>
+        <h1>Event Booking Management</h1>
         <p>Plan and book your upcoming events easily!</p>
         <a href="login.php" class="btn">Login</a>
         <a href="register.php" class="btn">Register</a>
