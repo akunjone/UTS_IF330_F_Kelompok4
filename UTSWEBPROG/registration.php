@@ -16,6 +16,8 @@
         </nav>
     </header>
 <h1>Registration</h1>
+<h3>Hello There, Welcome to the Event Registration</h3>
+<h4>Please fill in the form below and choose roles</h4>
 
 <form action="../UTSWEBPROG/proses.php" method="post">
     <label>Username</label>

@@ -36,10 +36,10 @@ if ($koneksi = new PDO('mysql:host=' . HOSTNAME . ';dbname=' . MYSQLDB, MYSQLUSE
 
     if ($statement->execute()) {
         if ($statement->rowCount() > 0) {
-            header("Location: ../admin/viewevent.php");
+            header("Location: ../admin/viewregistrant.php");
             exit();
         } else {
-            echo "No rows updated<br />";
+            header("Location: ../admin/viewevent.php");
         }
     }
 } else {

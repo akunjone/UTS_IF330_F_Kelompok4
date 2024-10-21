@@ -12,6 +12,8 @@
                 <li><a class="NavbarMenuUser" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a></li>
                 <li><a class="NavbarMenuUser" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a></li>
                 <li><a class="NavbarMenuUser" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a></li>
+                <li><a class="NavbarMenuUser" href="../user/logout.php"><i class="fa-solid fa-tree"></i>Logout</a></li>
+                <li><a class="NavbarMenuUser" href="../user/profilemanagement.php"><i class="fa-solid fa-tree"></i>Profile</a></li>
             </ul>
         </nav>
     </header>

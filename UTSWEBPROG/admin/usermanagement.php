@@ -13,6 +13,8 @@
                 <li><a class="NavbarMenuAdmin" href="../admin/eventmanagement.php"><i class="fa-solid fa-info"></i>Event Management</a></li>
                 <li><a class="NavbarMenuAdmin" href="../admin/viewregistrant.php"><i class="fa-solid fa-tree"></i>View Registrant</a></li>
                 <li><a class="NavbarMenuAdmin" href="../admin/usermanagement.php"><i class="fa-solid fa-tree"></i>User Management</a></li>
+                <li><a class="NavbarMenuAdmin" href="../admin/viewevent.php"><i class="fa-solid fa-tree"></i>View All Event</a></li>
+                <li><a class="NavbarMenuAdmin" href="../admin/logout.php"><i class="fa-solid fa-tree"></i>Logout</a></li>
             </ul>
         </nav>
     </header>

@@ -16,10 +16,10 @@ $sql->execute(['id' => $_GET['id']]);
 $dataa = $sql->fetch(PDO::FETCH_ASSOC);
 
 ?>
-<h1>Edit Event</h1>
+<h1>Edit Profile</h1>
 
 <form action="prosesupdate.php" method="post">
-    <label>Event ID</label>
+    <label>ID Profile</label>
     <input type="text" name="id" value="<?php echo $dataa['id']; ?>" readonly />
     <br />
     <label>Username</label>
