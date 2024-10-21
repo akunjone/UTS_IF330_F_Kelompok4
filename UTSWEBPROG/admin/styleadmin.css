@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.NavbarComponentsAdmin {
+    background-color: #333;
+    padding: 15px;
+}
+
+.NavbarSymbolAdmin {
+    color: #fff;
+    font-size: 24px;
+    display: inline;
+}
+
+.NavbarMenuAdmin {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.NavbarMenuAdmin:hover {
+    color: #ffcc00;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+li {
+    display: inline;
+    margin-right: 15px;
+}
