@@ -8,7 +8,7 @@
         <nav class="NavbarComponentsUser">
             <h1 class="NavbarSymbolUser">Madevent</h1>
             <ul>
-                <li><a class="NavbarMenuUser" href="/"><i class="fa-solid fa-house-chimney"></i>Home</a></li>
+                <li><a class="NavbarMenuUser" href="../user/userhome.php"><i class="fa-solid fa-house-chimney"></i>Home</a></li>
                 <li><a class="NavbarMenuUser" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a></li>
                 <li><a class="NavbarMenuUser" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a></li>
                 <li><a class="NavbarMenuUser" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a></li>

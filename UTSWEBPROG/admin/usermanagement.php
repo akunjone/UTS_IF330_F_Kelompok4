@@ -9,9 +9,10 @@
         <nav class="NavbarComponentsAdmin">
             <h1 class="NavbarSymbolAdmin">Madevent</h1>
             <ul>
-                <li><a class="NavbarMenuAdmin" href="/"><i class="fa-solid fa-house-chimney"></i>Home</a></li>
+                <li><a class="NavbarMenuAdmin" href="../admin/useradmin.php"><i class="fa-solid fa-house-chimney"></i>Home</a></li>
                 <li><a class="NavbarMenuAdmin" href="../admin/eventmanagement.php"><i class="fa-solid fa-info"></i>Event Management</a></li>
                 <li><a class="NavbarMenuAdmin" href="../admin/viewregistrant.php"><i class="fa-solid fa-tree"></i>View Registrant</a></li>
+                <li><a class="NavbarMenuAdmin" href="../admin/usermanagement.php"><i class="fa-solid fa-tree"></i>User Management</a></li>
             </ul>
         </nav>
     </header>
@@ -42,7 +43,7 @@
             LEFT JOIN regist r ON e.EventID = r.EventID
             GROUP BY e.EventID";
 
-        require_once __DIR__ . '/../vendor/autoload.php';
+        require_once '../vendor/autoload.php';
         use PhpOffice\PhpSpreadsheet\Spreadsheet;
         use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
         use PhpOffice\PhpSpreadsheet\IOFactory;
