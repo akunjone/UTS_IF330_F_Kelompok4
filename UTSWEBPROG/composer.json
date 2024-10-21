@@ -1,0 +1,18 @@
+{
+    "name": "lenovo/tugas2_88626",
+    "description": "Tugas 2|88626",
+    "autoload": {
+        "psr-4": {
+            "Lenovo\\Tugas288626\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "akunjone",
+            "email": "johnwitness0@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^3.3"
+    }
+}
