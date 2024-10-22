@@ -42,36 +42,68 @@
             margin-top: 150px;
             text-align: center;
         }
+        .card {
+            background-color: #1b263b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .card h1 {
+            color: #00d9ff;
+        }
+        .card label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .card input, .card textarea, .card button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .card button {
+            background-color: #00d9ff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #007ea7;
+        }
     </style>
 </head>
-    <header>
-        <nav class="NavbarComponents">
-            <h1 class="NavbarSymbol">Madevent</h1>
-            <div>
-                <a class="NavbarMenu" href="../user/userhome.php"><i class="fa-solid fa-house-chimney"></i>Home</a>
-                <a class="NavbarMenu" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a>
-                <a class="NavbarMenu" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a>
-                <a class="NavbarMenu" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a>
-                <a class="NavbarMenu" href="../user/logout.php"><i class="fa-solid fa-tree"></i>Logout</a>
-                <a class="NavbarMenu" href="../user/profilemanagement.php"><i class="fa-solid fa-tree"></i>Profile</a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="NavbarComponents">
+        <h1 class="NavbarSymbol">Madevent</h1>
+        <div>
+            <a class="NavbarMenu" href="../user/userhome.php">Home</a>
+            <a class="NavbarMenu" href="../user/event.php">View Events</a>
+            <a class="NavbarMenu" href="../user/registevent.php">Event Registration</a>
+            <a class="NavbarMenu" href="../user/viewregistered.php">Registered</a>
+            <a class="NavbarMenu" href="../user/logout.php">Logout</a>
+            <a class="NavbarMenu" href="../user/profilemanagement.php">Profile</a>
+        </div>
+    </nav>
+</header>
 <body>
     <div class="content">
         <?php
-        $koneksi = new PDO('mysql:host=localhost;dbname=event', 'root', '');
+        try {
+            $koneksi = new PDO('mysql:host=localhost;dbname=event', 'root', '');
+            $koneksi->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        if (!$koneksi) {
-            die("Koneksi gagal: " . mysqli_connect_error());
+            $sql = $koneksi->prepare("SELECT * FROM events WHERE EventID = :eventID");
+            $sql->execute(['eventID' => $_GET['EventID']]);
+            $dataa = $sql->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("Koneksi gagal: " . $e->getMessage());
         }
-
-        $sql = $koneksi->prepare("SELECT * FROM events WHERE EventID = :eventID");
-        $sql->execute(['eventID' => $_GET['EventID']]);
-        $dataa = $sql->fetch(PDO::FETCH_ASSOC);
         ?>
         <h1>Edit Event</h1>
-
+        <div class="card">
         <form action="update.php" method="post">
             <label>Event ID</label>
             <input type="text" name="EventID" value="<?php echo $dataa['EventID']; ?>" readonly />
@@ -81,6 +113,7 @@
             <br />
             <button type="submit">Regist</button>
         </form>
+    </div>
     </div>
 </body>
 </html>
