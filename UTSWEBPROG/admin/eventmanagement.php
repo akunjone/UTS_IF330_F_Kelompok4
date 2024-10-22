@@ -42,8 +42,48 @@
             margin-top: 150px;
             text-align: center;
         }
+        .card {
+            background-color: #1b263b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .card h1 {
+            color: #00d9ff;
+        }
+        .card label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .card input, .card textarea, .card button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .card button {
+            background-color: #00d9ff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #007ea7;
+        }
+        .image-preview {
+            margin-top: 10px;
+            display: none;
+        }
+        .image-preview img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
     </style>
 </head>
+<body>
     <nav class="NavbarComponents">
         <h1 class="NavbarSymbol">Madevent</h1>
         <ul>
@@ -55,32 +95,53 @@
             <li><a class="NavbarMenu" href="../admin/logout.php">Logout</a></li>     
         </ul>
     </nav>
-<body>
+
     <div class="content">
-        <h1>Registration</h1>
-        <form action="../admin/prosesevent.php" method="post">
-            <label>Nama Event</label>
-            <input type="text" name="NamaEvent" required />
-            <br />
-            <label>Tanggal</label>
-            <input type="date" name="Tanggal" required />
-            <br />
-            <label>Waktu</label>
-            <input type="time" name="Waktu" required />
-            <br />
-            <label>Lokasi</label>
-            <input type="text" name="Lokasi" required />
-            <br />
-            <label>Deskripsi</label>
-            <textarea name="Deskripsi"></textarea>
-            <br />
-            <label>Kapasitas</label>
-            <input type="number" name="Kapasitas" required />
-            <br />
-            <label>Foto</label>
-            <input type="file" name="Foto"><br>
-            <button href="../admin/viewevent.php" type="submit">Make Event</button>
-        </form>
+        <div class="card">
+            <h1>Registration</h1>
+            <form action="../admin/prosesevent.php" method="post" enctype="multipart/form-data">
+                <label>Nama Event</label>
+                <input type="text" name="NamaEvent" required />
+
+                <label>Tanggal</label>
+                <input type="date" name="Tanggal" required />
+
+                <label>Waktu</label>
+                <input type="time" name="Waktu" required />
+
+                <label>Lokasi</label>
+                <input type="text" name="Lokasi" required />
+
+                <label>Deskripsi</label>
+                <textarea name="Deskripsi"></textarea>
+
+                <label>Kapasitas</label>
+                <input type="number" name="Kapasitas" required />
+
+                <label>Foto</label>
+                <input type="file" name="Foto" id="fotoInput" accept="image/*">
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImage" src="" alt="Preview">
+                </div>
+
+                <button type="submit">Make Event</button>
+            </form>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('fotoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
