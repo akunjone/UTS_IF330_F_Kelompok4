@@ -42,7 +42,7 @@
             margin-top: 150px;
             text-align: center;
         }
-        .table-style{
+        .table-style {
             border-collapse: collapse;
             margin: 25px 0;
             font-size: 0.9em;
@@ -56,7 +56,7 @@
             text-align: left;
         }
         .table-style th,
-        .table-style td{
+        .table-style td {
             padding: 12px 15px;
         }
         .table-style tbody tr {
@@ -65,21 +65,25 @@
         .table-style tbody tr:last-of-type {
             border-bottom: 2px solid #009879;
         }
+        .event-image {
+            width: 100px; 
+            height: auto;
+        }
     </style>
 </head>
-    <header>
-        <nav class="NavbarComponents">
-            <h1 class="NavbarSymbol">Madevent</h1>
-            <div>
-                <a class="NavbarMenu" href="../user/userhome.php"><i class="fa-solid fa-house-chimney"></i>Home</a>
-                <a class="NavbarMenu" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a>
-                <a class="NavbarMenu" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a>
-                <a class="NavbarMenu" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a>
-                <a class="NavbarMenu" href="../user/logout.php"><i class="fa-solid fa-tree"></i>Logout</a>
-                <a class="NavbarMenu" href="../user/profilemanagement.php"><i class="fa-solid fa-tree"></i>Profile</a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="NavbarComponents">
+        <h1 class="NavbarSymbol">Madevent</h1>
+        <div>
+            <a class="NavbarMenu" href="../user/userhome.php">Home</a>
+            <a class="NavbarMenu" href="../user/event.php">View Events</a>
+            <a class="NavbarMenu" href="../user/registevent.php">Event Registration</a>
+            <a class="NavbarMenu" href="../user/viewregistered.php">Registered</a>
+            <a class="NavbarMenu" href="../user/logout.php">Logout</a>
+            <a class="NavbarMenu" href="../user/profilemanagement.php">Profile</a>
+        </div>
+    </nav>
+</header>
 <body>
     <div class="content">
         <h1>View All Events</h1>
@@ -88,24 +92,30 @@
             <thead>
                 <tr>
                     <th>Nama Event</th>
+                    <th>Foto Event</th> 
                     <th>More Info</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
+            <?php
                 $koneksi = mysqli_connect("localhost", "root", "", "event");
                 $data = mysqli_query($koneksi, "SELECT * FROM events");
                 while ($display = mysqli_fetch_array($data)){
-                    echo "
-                    <tr>
-                        <td>{$display['NamaEvent']}</td>
-                        <td>
-                            <a href ='moreinfo.php'>Check</a>
-                        </td>
-                    </tr>";
-                }
-                ?>
-            </tbody>
+                echo "
+             <tr>
+                <td>{$display['NamaEvent']}</td>
+            <td>
+                <img src='../uploads/{$display['Foto']}' alt='Gambar Event' style='max-width: 100px; max-height: 100px;'>
+                <br>
+                </td>
+                <td>
+                <a href='moreinfo.php?EventID={$display['EventID']}'>Check</a>
+                </td>
+                </tr>";
+            }
+    ?>
+</tbody>
+
         </table>
     </div>
 </body>
