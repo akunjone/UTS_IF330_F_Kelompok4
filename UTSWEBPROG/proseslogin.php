@@ -30,13 +30,16 @@ if (!empty($email) && !empty($password)) {
             }
             exit();
         } else {
-            echo "Password salah!";
+            header("Location: login.php");
+            alert("Password salah, coba lagi!");
         }
     } else {
-        echo "Email tidak ditemukan!";
+        header("Location: registration.php");
+        alert("Akun tidak ditemukan, apakah Anda mau registrasi?");
     }
 } else {
-    echo "Silakan lengkapi semua field!";
+    header("Location:login.php");
+    alert("Silakan isi semua field!");
 }
 
 mysqli_close($koneksi);

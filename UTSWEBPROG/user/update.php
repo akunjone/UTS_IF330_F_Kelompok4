@@ -11,7 +11,7 @@ $Username = $_POST['Username'];
 $query = "INSERT INTO regist (EventID, Username) VALUES ('$EventID', '$Username')";
 
 if (mysqli_query($koneksi, $query)) {
-    header("Location: ../user/registevent.php");
+    header("Location: ../user/viewregistered.php");
     exit();
 } else {
     echo "Error: " . mysqli_error($koneksi);

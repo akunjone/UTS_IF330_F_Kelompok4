@@ -159,7 +159,7 @@
                 </div>
                 <div class="bottom-links">
                     <a href="registration.php">Create account</a>
-                    <button class="btn" type="button" onclick="showPasswordPage()">Next</button>
+                    <button class="btn" type="button" id="nextButton" onclick="showPasswordPage()">Next</button>
                 </div>
             </form>
         </div>
