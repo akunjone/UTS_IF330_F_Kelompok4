@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Info</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../user/styleuser.css">
-    <title>MoreInfo</title>
     <style>
         body {
             display: flex;
@@ -40,80 +44,69 @@
         }
         .content {
             margin-top: 150px;
-            text-align: center;
+            padding: 20px;
+            width: 100%;
         }
-        .table-style{
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .table-style thead tr {
-            background-color: #45b6d6;
+        .card {
+            margin: 15px;
+            background-color: #1b263b;
             color: #ffffff;
-            text-align: left;
+            border: 1px solid #45b6d6;
         }
-        .table-style th,
-        .table-style td{
-            padding: 12px 15px;
+        .card-body {
+            padding: 20px;
         }
-        .table-style tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-        .table-style tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
+        .card-text {
+            margin-bottom: 10px;
         }
     </style>
 </head>
-    <header>
-        <nav class="NavbarComponents">
-            <h1 class="NavbarSymbol">Madevent</h1>
-            <div>
-                <a class="NavbarMenu" href="../user/userhome.php"><i class="fa-solid fa-house-chimney"></i>Home</a>
-                <a class="NavbarMenu" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a>
-                <a class="NavbarMenu" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a>
-                <a class="NavbarMenu" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a>
-                <a class="NavbarMenu" href="../user/logout.php"><i class="fa-solid fa-tree"></i>Logout</a>
-                <a class="NavbarMenu" href="../user/profilemanagement.php"><i class="fa-solid fa-tree"></i>Profile</a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="NavbarComponents">
+        <h1 class="NavbarSymbol">Madevent</h1>
+        <div>
+            <a class="NavbarMenu" href="../user/userhome.php">Home</a>
+            <a class="NavbarMenu" href="../user/event.php">View Events</a>
+            <a class="NavbarMenu" href="../user/registevent.php">Event Registration</a>
+            <a class="NavbarMenu" href="../user/viewregistered.php">Registered</a>
+            <a class="NavbarMenu" href="../user/logout.php">Logout</a>
+            <a class="NavbarMenu" href="../user/profilemanagement.php">Profile</a>
+        </div>
+    </nav>
+</header>
 <body>
     <div class="content">
         <h1>More Info</h1>
-        <table class="table-style">
-            <thead>
-                <tr>
-                    <th>Event ID</th>
-                    <th>Nama Event</th>
-                    <th>Tanggal</th>
-                    <th>Waktu</th>
-                    <th>Lokasi</th>
-                    <th>Deskripsi</th>
-                    <th>Kapasitas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
+
+        <div class="card-deck">
+            <?php
                 $koneksi = mysqli_connect("localhost", "root", "", "event");
-                $data = mysqli_query($koneksi, "SELECT * FROM events");
+                $eventID = $_GET['EventID']; 
+
+                $data = mysqli_query($koneksi, "SELECT * FROM events WHERE EventID='$eventID'");
                 while ($display = mysqli_fetch_array($data)){
                     echo "
-                    <tr>
-                        <td>{$display['EventID']}</td>
-                        <td>{$display['NamaEvent']}</td>
-                        <td>{$display['Tanggal']}</td>
-                        <td>{$display['Waktu']}</td>
-                        <td>{$display['Lokasi']}</td>
-                        <td>{$display['Deskripsi']}</td>
-                        <td>{$display['Kapasitas']}</td>
-                    </tr>";
+                    <div class='card' style='width: 18rem;'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>{$display['NamaEvent']}</h5>
+                            <p class='card-text'><strong>Date:</strong> {$display['Tanggal']}</p>
+                            <p class='card-text'><strong>Time:</strong> {$display['Waktu']}</p>
+                            <p class='card-text'><strong>Location:</strong> {$display['Lokasi']}</p>
+                            <p class='card-text'><strong>Description:</strong> {$display['Deskripsi']}</p>
+                            <p class='card-text'><strong>Capacity:</strong> {$display['Kapasitas']}</p>
+                        </div>
+                    </div>";
                 }
-                ?>
-            </tbody>
-        </table>
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
