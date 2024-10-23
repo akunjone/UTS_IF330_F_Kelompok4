@@ -1,88 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../admin/styleadmin.css">
-    <title>Madevent</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Madevent</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
             background-color: #0d1b2a;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
         }
-        .NavbarComponents {
-            width: 100%;
+        .navbar {
             background-color: #1b263b;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            position: fixed; 
-            top: 0;
-            left: 0;
-            z-index: 1000; 
+            padding: 15px 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .NavbarSymbol {
-            display: inline-block;
+        .navbar h1 {
             font-size: 24px;
+            margin: 0;
             color: #00d9ff;
         }
-        .NavbarMenu {
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .navbar a {
             color: #ffffff;
             text-decoration: none;
-            margin: 0 15px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .navbar a:hover {
+            background-color: #45b6d6;
+            border-radius: 5px;
+        }
+        .navbar .dropdown {
+            position: relative;
             display: inline-block;
         }
-        .NavbarMenu:hover {
-            text-decoration: underline;
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1b263b;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
-        .content {
-            margin-top: 150px;
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+        }
+        .main-content {
+            padding: 40px;
             text-align: center;
         }
-        .table-style{
+        h2 {
+            margin-top: 40px;
+            color: #333333;
+        }
+        .table-style {
+            width: 100%;
+            margin-top: 30px;
             border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
         }
-        .table-style thead tr {
-            background-color: #45b6d6;
+        .table-style thead {
+            background-color: #1b263b;
             color: #ffffff;
-            text-align: left;
         }
-        .table-style th,
-        .table-style td{
+        .table-style th, .table-style td {
             padding: 12px 15px;
+            text-align: left;
         }
         .table-style tbody tr {
             border-bottom: 1px solid #dddddd;
         }
-        .table-style tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
+        .table-style tbody tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 </head>
-    <header>
-        <nav class="NavbarComponents">
-            <h1 class="NavbarSymbol">Madevent</h1>
-            <ul>
-                <li><a class="NavbarMenu" href="../admin/useradmin.php">Home</a></li>
-                <li><a class="NavbarMenu" href="../admin/eventmanagement.php">Event Management</a></li>
-                <li><a class="NavbarMenu" href="../admin/viewregistrant.php">View Registrant</a></li>
-                <li><a class="NavbarMenu" href="../admin/usermanagement.php">User Management</a></li>
-                <li><a class="NavbarMenu" href="../admin/viewevent.php">View All Event</a></li>
-                <li><a class="NavbarMenu" href="../admin/logout.php">Logout</a></li>     
-            </ul>
-        </nav>
-    </header>
 <body>
-    <div class="content">
-        
+
+
+    <div class="navbar">
+        <h1>Madevent Admin</h1>
+        <ul>
+            <li><a href="useradmin.php">Home</a></li>
+            <li><a href="eventmanagement.php">Event Management</a></li>
+            <li><a href="viewregistrant.php">View Registrant</a></li>
+            <li><a href="usermanagement.php">User Management</a></li>
+            <li><a href="viewevent.php">View All Events</a></li>
+            <li class="dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-content">
+                    <a href="profile.php">Profile</a>
+                    <a href="logout.php">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+  
+    <div class="main-content">
+        <h1>Welcome, Admin</h1>
+
+        <h2>Recent Events</h2>
         <table class="table-style">
             <thead>
                 <tr>
@@ -126,5 +162,6 @@
             </tbody>
         </table>
     </div>
+
 </body>
 </html>
