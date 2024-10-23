@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Events</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../user/styleuser.css">
-    <title>Event</title>
     <style>
         body {
             display: flex;
@@ -40,34 +44,26 @@
         }
         .content {
             margin-top: 150px;
-            text-align: center;
+            padding: 20px;
+            width: 100%;
         }
-        .table-style {
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .table-style thead tr {
-            background-color: #45b6d6;
+        .card {
+            margin: 15px;
+            background-color: #1b263b;
             color: #ffffff;
-            text-align: left;
+            border: 1px solid #45b6d6;
         }
-        .table-style th,
-        .table-style td {
-            padding: 12px 15px;
-        }
-        .table-style tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-        .table-style tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
-        }
-        .event-image {
-            width: 100px; 
+        .card-img-top {
+            max-width: 100%;
             height: auto;
+        }
+        .btn-primary {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -88,35 +84,31 @@
     <div class="content">
         <h1>View All Events</h1>
 
-        <table class="table-style">
-            <thead>
-                <tr>
-                    <th>Nama Event</th>
-                    <th>Foto Event</th> 
-                    <th>More Info</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="card-deck">
             <?php
                 $koneksi = mysqli_connect("localhost", "root", "", "event");
                 $data = mysqli_query($koneksi, "SELECT * FROM events");
-                while ($display = mysqli_fetch_array($data)){
-                echo "
-             <tr>
-                <td>{$display['NamaEvent']}</td>
-            <td>
-                <img src='../uploads/{$display['Foto']}' alt='Gambar Event' style='max-width: 100px; max-height: 100px;'>
-                <br>
-                </td>
-                <td>
-                <a href='moreinfo.php?EventID={$display['EventID']}'>Check</a>
-                </td>
-                </tr>";
-            }
-    ?>
-</tbody>
+                while ($display = mysqli_fetch_array($data)) {
+                    $img_path = "../uploads/" . $display['Foto'];  // Assuming 'Foto' is the image filename
+                    $img_tag = "<img src='$img_path' class='card-img-top img-fluid rounded' alt='Event Image'/>";
 
-        </table>
+                    echo "
+                    <div class='card' style='width: 18rem;'>
+                        $img_tag
+                        <div class='card-body'>
+                            <h5 class='card-title'>{$display['NamaEvent']}</h5>
+                            <p class='card-text'><strong>Date:</strong> {$display['Tanggal']}</p>
+                            <p class='card-text'><strong>Location:</strong> {$display['Lokasi']}</p>
+                            <p class='card-text'><strong>Description:</strong> {$display['Deskripsi']}</p>
+                            <a href='moreinfo.php?EventID={$display['EventID']}' class='btn btn-primary btn-sm'>More Info</a>
+                        </div>
+                    </div>";
+                }
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
