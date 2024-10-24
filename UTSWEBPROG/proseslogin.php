@@ -1,6 +1,7 @@
 <?php
 $koneksi = mysqli_connect("localhost", "root", "", "event");
 session_start();
+$_SESSION['id'] = $id;
 
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
@@ -44,3 +45,4 @@ if (!empty($email) && !empty($password)) {
 
 mysqli_close($koneksi);
 ?>
+
