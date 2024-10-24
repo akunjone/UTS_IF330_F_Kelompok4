@@ -91,29 +91,50 @@
 <body>
     <div class="content">
         <?php
+        session_start();
+        
+        if (!isset($_SESSION['id'])) {
+            echo "<p>You need to log in first.</p>";
+            exit;
+        }
+
         try {
             $koneksi = new PDO('mysql:host=localhost;dbname=event', 'root', '');
             $koneksi->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $current_user_id = $_SESSION['id'];
 
-            $sql = $koneksi->prepare("SELECT * FROM events WHERE EventID = :eventID");
-            $sql->execute(['eventID' => $_GET['EventID']]);
-            $dataa = $sql->fetch(PDO::FETCH_ASSOC);
+            if (isset($_GET['EventID']) && is_numeric($_GET['EventID'])) {
+                $sql = $koneksi->prepare("SELECT * FROM events WHERE EventID = :eventID");
+                $sql->execute(['eventID' => $_GET['EventID']]);
+                $dataa = $sql->fetch(PDO::FETCH_ASSOC);
+            } else {
+                echo "<p>Invalid Event ID.</p>";
+                exit;
+            }
+
         } catch (PDOException $e) {
-            die("Koneksi gagal: " . $e->getMessage());
+            die("Connection failed: " . $e->getMessage());
         }
         ?>
+
         <h1>Edit Event</h1>
         <div class="card">
-        <form action="update.php" method="post">
-            <label>Event ID</label>
-            <input type="text" name="EventID" value="<?php echo $dataa['EventID']; ?>" readonly />
-            <br />
-            <label>Username</label>
-            <input type="text" name="Username" required />
-            <br />
-            <button type="submit">Regist</button>
-        </form>
-    </div>
+            <form action="update.php" method="post">
+                <label>Event ID</label>
+                <input type="text" name="EventID" value="<?php echo htmlspecialchars($dataa['EventID']); ?>" readonly />
+                <br />
+                
+                <label>User ID</label>
+                <input type="text" name="UserID" value="<?php echo htmlspecialchars($current_user_id); ?>" readonly />
+                <br/>
+
+                <label>Username</label>
+                <input type="text" name="Username" value="<?php echo isset($dataa['Username']) ? htmlspecialchars($dataa['Username']) : ''; ?>" required />
+                <br />
+                
+                <button type="submit">Update</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

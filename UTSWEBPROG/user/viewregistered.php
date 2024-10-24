@@ -1,8 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <link rel="stylesheet" href="../user/styleuser.css">
-    <title>Registered Event</title>
+    <title>Registered Events</title>
     <style>
         body {
             display: flex;
@@ -73,12 +73,12 @@
         <nav class="NavbarComponents">
             <h1 class="NavbarSymbol">Madevent</h1>
             <div>
-                <a class="NavbarMenu" href="../user/userhome.php"><i class="fa-solid fa-house-chimney"></i>Home</a>
-                <a class="NavbarMenu" href="../user/event.php"><i class="fa-solid fa-info"></i>View Events</a>
-                <a class="NavbarMenu" href="../user/registevent.php"><i class="fa-solid fa-tree"></i>Event Registration</a>
-                <a class="NavbarMenu" href="../user/viewregistered.php"><i class="fa-solid fa-tree"></i>Registered</a>
-                <a class="NavbarMenu" href="../user/logout.php"><i class="fa-solid fa-tree"></i>Logout</a>
-                <a class="NavbarMenu" href="../user/profilemanagement.php"><i class="fa-solid fa-tree"></i>Profile</a>
+                <a class="NavbarMenu" href="../user/userhome.php">Home</a>
+                <a class="NavbarMenu" href="../user/event.php">View Events</a>
+                <a class="NavbarMenu" href="../user/registevent.php">Event Registration</a>
+                <a class="NavbarMenu" href="../user/viewregistered.php">Registered</a>
+                <a class="NavbarMenu" href="../user/logout.php">Logout</a>
+                <a class="NavbarMenu" href="../user/profilemanagement.php">Profile</a>
             </div>
         </nav>
     </header>
@@ -97,9 +97,32 @@
             </thead>
             <tbody>
                 <?php
+                if (isset($_GET['error']) && $_GET['error'] === 'duplicate') {
+                    echo "<p style='color: red;'>You are already registered for this event.</p>";
+                }
+                
+                session_start();
+                if (!isset($_SESSION['id'])) {
+                    echo "<tr><td colspan='6'>You must log in to view your registered events.</td></tr>";
+                    exit;
+                }
+
+                $current_user_id = $_SESSION['id'];
+
                 $koneksi = mysqli_connect("localhost", "root", "", "event");
-                $data = mysqli_query($koneksi, "SELECT regist.EventID,regist.Username,events.NamaEvent,events.Tanggal,events.Waktu,events.Lokasi FROM regist JOIN events ON regist.EventID=events.EventID");
-                while ($display = mysqli_fetch_array($data)){
+
+                if (!$koneksi) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $data = mysqli_query($koneksi, "
+                    SELECT regist.EventID, regist.Username, events.NamaEvent, events.Tanggal, events.Waktu, events.Lokasi 
+                    FROM regist 
+                    JOIN events ON regist.EventID = events.EventID 
+                    WHERE regist.userID = '$current_user_id'
+                ");
+
+                while ($display = mysqli_fetch_array($data)) {
                     echo "
                     <tr>
                         <td>{$display['NamaEvent']}</td>
@@ -108,13 +131,15 @@
                         <td>{$display['Waktu']}</td>
                         <td>{$display['Lokasi']}</td>
                         <td>
-                            <a href='cancel.php?EventID={$display['EventID']}'onclick='return confirm(\"Are you sure you want to cancel this event?\");'>Cancel</a>
+                            <a href='cancel.php?EventID={$display['EventID']}&userID={$current_user_id}' onclick='return confirm(\"Are you sure you want to cancel this event?\");'>Cancel</a>
                         </td>
                     </tr>";
                 }
+
+                mysqli_close($koneksi);
                 ?>
             </tbody>
-            
         </table>
     </div>
 </body>
+</html>

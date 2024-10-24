@@ -86,7 +86,8 @@
         <div class="card-deck">
             <?php
             $koneksi = mysqli_connect("localhost", "root", "", "event");
-            $data = mysqli_query($koneksi, "SELECT * FROM events");
+            $data = mysqli_query($koneksi, 'SELECT * FROM events');
+            
             while ($display = mysqli_fetch_array($data)){
                 echo "
                 <div class='card' style='width: 18rem;'>

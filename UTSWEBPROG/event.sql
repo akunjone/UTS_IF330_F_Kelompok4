@@ -24,7 +24,8 @@ CREATE TABLE users (
 
 CREATE TABLE regist (
     EventID INT NOT NULL,
+    userID INT NOT NULL,
     Username VARCHAR(30) NOT NULL,
     FOREIGN KEY (EventID) REFERENCES events(EventID) ON DELETE CASCADE,
-    UNIQUE (EventID)
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
