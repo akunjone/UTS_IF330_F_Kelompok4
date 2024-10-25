@@ -25,8 +25,10 @@ if (!empty($email) && !empty($password)) {
             $_SESSION['role'] = $role['role'];
 
             if ($role['role'] == 'us') {
+                //kalo user
                 header("Location: user/userhome.php");
             } else {
+                //kalo admin
                 header("Location: admin/useradmin.php");
             }
             exit();

@@ -68,9 +68,12 @@
             padding: 40px;
             text-align: center;
         }
+        .main-content h1 {
+            color: #ffffff;
+        }
         h2 {
             margin-top: 40px;
-            color: #333333;
+            color: #ffffff;
         }
         .table-style {
             width: 100%;

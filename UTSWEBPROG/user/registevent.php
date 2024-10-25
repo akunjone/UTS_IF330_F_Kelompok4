@@ -82,7 +82,7 @@
 </header>
 <body>
     <div class="content">
-        <h1>Event Registration</h1>
+        <h1 align="center">Event Registration</h1>
         <div class="card-deck">
         <?php
     
@@ -93,31 +93,44 @@
         while ($display = mysqli_fetch_array($data)) {
             $eventID = $display['EventID'];
             $capacity = $display['Kapasitas'];
-
-            $countQuery = "SELECT COUNT(*) AS total_registrations FROM regist WHERE EventID = $eventID";
-            $countResult = mysqli_query($koneksi, $countQuery);
-            $registCount = mysqli_fetch_assoc($countResult)['total_registrations'];
-
-            if ($registCount < $capacity) {
-                //kalo ga full, show register button
+            $date = $display['Tanggal'];
+            $curr_date = date('Y-m-d');
+            
+            if ($curr_date > $date) {
                 echo "
                 <div class='card' style='width: 18rem;'>
                     <img src='../uploads/{$display['Foto']}' class='card-img-top' alt='{$display['NamaEvent']}'>
                     <div class='card-body text-center'>
                         <h5 class='card-title'>{$display['NamaEvent']}</h5>
-                        <a href='edit.php?EventID={$display['EventID']}' class='btn btn-primary'>Register</a>
+                        <button class='btn btn-secondary' disabled>Closed</button>
                     </div>
                 </div>";
-            } else {
-                //kalo event full, ga show register button dan tampilin full
-                echo "
-                <div class='card' style='width: 18rem;'>
-                    <img src='../uploads/{$display['Foto']}' class='card-img-top' alt='{$display['NamaEvent']}'>
-                    <div class='card-body text-center'>
-                        <h5 class='card-title'>{$display['NamaEvent']}</h5>
-                        <button class='btn btn-secondary' disabled>Full</button>
-                    </div>
-                </div>";
+            } else{
+                $countQuery = "SELECT COUNT(*) AS total_registrations FROM regist WHERE EventID = $eventID";
+                $countResult = mysqli_query($koneksi, $countQuery);
+                $registCount = mysqli_fetch_assoc($countResult)['total_registrations'];
+
+                if ($registCount < $capacity) {
+                    //kalo ga full, show register button
+                    echo "
+                    <div class='card' style='width: 18rem;'>
+                        <img src='../uploads/{$display['Foto']}' class='card-img-top' alt='{$display['NamaEvent']}'>
+                        <div class='card-body text-center'>
+                            <h5 class='card-title'>{$display['NamaEvent']}</h5>
+                            <a href='edit.php?EventID={$display['EventID']}' class='btn btn-primary'>Register</a>
+                        </div>
+                    </div>";
+                } else {
+                    //kalo event full, ga show register button dan tampilin full
+                    echo "
+                    <div class='card' style='width: 18rem;'>
+                        <img src='../uploads/{$display['Foto']}' class='card-img-top' alt='{$display['NamaEvent']}'>
+                        <div class='card-body text-center'>
+                            <h5 class='card-title'>{$display['NamaEvent']}</h5>
+                            <button class='btn btn-secondary' disabled>Full</button>
+                        </div>
+                    </div>";
+                }
             }
         }
         ?>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madevent</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-3yD7K3q8ha7SMvj1Z4IMDf3fp4NlCO08+H7U0uM0t5G5xOn5L9vP25uX0yzUOqlZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../admin/styleadmin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -69,8 +69,7 @@
             text-align: center;
         }
         h2 {
-            margin-top: 40px;
-            color: #333333;
+            color: #ffffff;
         }
         .table-style {
             width: 100%;
@@ -114,8 +113,7 @@
         </ul>
     </div>
     <div class="main-content">
-        <h1>Event</h1>
-
+        <h2>View All Event</h1>
         <table class="table table-hover table-striped table-style">
             <thead>
                 <tr>
@@ -169,6 +167,7 @@
         </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-3yD7K3q8ha7SMvj1Z4IMDf3fp4NlCO08+H7U0uM0t5G5xOn5L9vP25uX0yzUOqlZ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

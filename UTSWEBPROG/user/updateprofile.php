@@ -42,14 +42,16 @@
             text-decoration: underline;
         }
         .content {
-            margin-top: 100px; 
-            text-align: center;
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); 
         }
         .card {
+            width: 40%;
             background-color: #1b263b;
             border: 1px solid #45b6d6; 
-            width: 400px; 
-            margin: auto; 
         }
         .card-header {
             background-color: #45b6d6; 
@@ -100,11 +102,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" value="<?php echo htmlspecialchars($dataa['username']); ?>" required />
+                        <input type="text" name="username" class="form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label ">Email</label>
-                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($dataa['email']); ?>" required />
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>

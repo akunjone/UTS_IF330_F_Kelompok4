@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="styleuser.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            display: flex;
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
             background-color: #0d1b2a;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
         }
         .navbar {
             background-color: #1b263b;
@@ -65,21 +64,32 @@
             padding: 12px 16px;
             display: block;
         }
-        .content {
-            margin-top: 100px; 
+        .main-content {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px);
             text-align: center;
         }
+        .main-content h1 {
+            color: #ffffff;
+        }
+        h2 {
+            margin-top: 40px;
+            color: #ffffff;
+        }
         .card {
+            width: 50%;
             background-color: #1b263b;
             border: 1px solid #45b6d6; 
-            width: 40%; 
-            max-width: 400px; 
-            margin: 0 auto; 
-            margin-bottom: 150px;
         }
         .card-header {
             background-color: #45b6d6; 
             color: #000000; 
+        }
+        .card-body label{
+            color: #ffffff;
         }
         .btn-primary {
             background-color: #00d9ff; 
@@ -94,7 +104,7 @@
             <li><a href="useradmin.php">Home</a></li>
             <li><a href="eventmanagement.php">Event Management</a></li>
             <li><a href="viewregistrant.php">View Registrant</a></li>
-            <li><a href="usermanagement.php">User  Management</a></li>
+            <li><a href="usermanagement.php">User Management</a></li>
             <li><a href="viewevent.php">View All Events</a></li>
             <li class="dropdown">
                 <a href="#">Account</a>
@@ -107,7 +117,7 @@
     </div>
 </header>
 <body>
-    <div class="content container">
+    <div class="main-content container">
         <?php
         $koneksi = new PDO('mysql:host=localhost;dbname=event', 'root', '');
 

@@ -82,7 +82,7 @@
 </header>
 <body>
     <div class="content">
-        <h1>View All Events</h1>
+        <h1 align="center">View All Events</h1>
 
         <div class="card-deck">
             <?php

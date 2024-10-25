@@ -43,11 +43,12 @@
             text-align: center;
         }
         .card {
+            width: 500px;
             background-color: #1b263b;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
         }
         .card h1 {
@@ -58,7 +59,7 @@
             margin: 10px 0 5px;
         }
         .card input, .card textarea, .card button {
-            width: 100%;
+            width: 50%;
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 5px;

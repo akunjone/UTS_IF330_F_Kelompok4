@@ -67,9 +67,8 @@
             padding: 40px;
             text-align: center;
         }
-        h2 {
-            margin-top: 40px;
-            color: #333333;
+        .main-content h2{
+            color:#ffffff;
         }
         .table-style {
             width: 100%;
@@ -113,89 +112,48 @@
         </ul>
     </div>
     <div class="main-content">
+        <h2>User Management</h2>
         <table class="table-style">
             <thead>
                 <tr>
-                    <th>Event ID</th>
-                    <th>Nama Event</th>
-                    <th>Tanggal</th>
-                    <th>Waktu</th>
-                    <th>Lokasi</th>
-                    <th>Deskripsi</th>
-                    <th>Kapasitas</th>
-                    <th>Pendaftar</th>
+                    <th>ID User</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Event</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $koneksi = mysqli_connect("localhost", "root", "", "event");
-                
-                if (!$koneksi) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
+            <?php
+            $koneksi = mysqli_connect("localhost", "root", "", "event");
 
-                $query = "
-                    SELECT e.EventID, e.NamaEvent, e.Tanggal, e.Waktu, e.Lokasi, e.Deskripsi, e.Kapasitas, 
-                    GROUP_CONCAT(r.Username) AS Username
-                    FROM events e
-                    LEFT JOIN regist r ON e.EventID = r.EventID
-                    GROUP BY e.EventID";
+            if (!$koneksi) {
+                die("Koneksi gagal: " . mysqli_connect_error());
+            }
 
-                require_once '../vendor/autoload.php';
-                use PhpOffice\PhpSpreadsheet\Spreadsheet;
-                use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-                use PhpOffice\PhpSpreadsheet\IOFactory;
+            $query = "
+                SELECT u.id, u.username, u.email, 
+                    COALESCE(GROUP_CONCAT(e.NamaEvent SEPARATOR ', '), 'No Events') AS events_joined
+                FROM users u
+                LEFT JOIN regist r ON u.id = r.userID
+                LEFT JOIN events e ON r.EventID = e.EventID
+                GROUP BY u.id";
 
-                $spreadsheet = new Spreadsheet();
+            $data = mysqli_query($koneksi, $query);
 
-                if (file_exists('registrants.xlsx')) {
-                    $spreadsheet = IOFactory::load('registrants.xlsx');
-                }
-                
-                $sheet = $spreadsheet->getActiveSheet();
-
-                if (!file_exists('registrants.xlsx')) {
-                    $sheet->setCellValue('A1', 'EventID');
-                    $sheet->setCellValue('B1', 'NamaEvent');
-                    $sheet->setCellValue('C1', 'Tanggal');
-                    $sheet->setCellValue('D1', 'Waktu');
-                    $sheet->setCellValue('E1', 'Lokasi');
-                    $sheet->setCellValue('F1', 'Deskripsi');
-                    $sheet->setCellValue('G1', 'Kapasitas');
-                    $sheet->setCellValue('H1', 'Username');
-                }
-
-                $data = mysqli_query($koneksi, $query);
-                
-                while ($display = mysqli_fetch_array($data)){
-                    echo "
-                    <tr>
-                        <td>{$display['EventID']}</td>
-                        <td>{$display['NamaEvent']}</td>
-                        <td>{$display['Tanggal']}</td>
-                        <td>{$display['Waktu']}</td>
-                        <td>{$display['Lokasi']}</td>
-                        <td>{$display['Deskripsi']}</td>
-                        <td>{$display['Kapasitas']}</td>
-                        <td>{$display['Username']}</td>
-                    </tr>";
-
-                    $lastRow = $sheet->getHighestRow() + 1;
-                    $sheet->setCellValue('A' . $lastRow, $display['EventID']);
-                    $sheet->setCellValue('B' . $lastRow, $display['NamaEvent']);
-                    $sheet->setCellValue('C' . $lastRow, $display['Tanggal']);
-                    $sheet->setCellValue('D' . $lastRow, $display['Waktu']);
-                    $sheet->setCellValue('E' . $lastRow, $display['Lokasi']);
-                    $sheet->setCellValue('F' . $lastRow, $display['Deskripsi']);
-                    $sheet->setCellValue('G' . $lastRow, $display['Kapasitas']);
-                    $sheet->setCellValue('H' . $lastRow, $display['Username']);
-                }
-
-                $writer = new Xlsx($spreadsheet);
-                $writer->save('registrants.xlsx');
-                
-                mysqli_close($koneksi);
-                ?>
+            while ($display = mysqli_fetch_array($data)) {
+                echo "
+                <tr>
+                    <td>{$display['id']}</td>
+                    <td>{$display['username']}</td>
+                    <td>{$display['email']}</td>
+                    <td>{$display['events_joined']}</td>
+                    <td>
+                        <a href='deleteuser.php?id={$display['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this user?\");'>Delete</a> 
+                    </td>
+                </tr>";
+            }
+            ?>
             </tbody>
         </table>
     </div>

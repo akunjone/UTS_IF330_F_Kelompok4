@@ -67,6 +67,9 @@
             padding: 40px;
             text-align: center;
         }
+        .main-content form label{
+            color:#ffffff;
+        }
         .card {
             background-color: #1b263b;
             padding: 20px;

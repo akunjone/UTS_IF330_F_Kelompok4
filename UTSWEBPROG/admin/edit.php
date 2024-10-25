@@ -67,6 +67,9 @@
             padding: 40px;
             text-align: center;
         }
+        h2{
+            color:#ffffff;
+        }
         .card {
             background-color: #1b263b;
             padding: 20px;
@@ -97,6 +100,9 @@
         }
         .card button:hover {
             background-color: #007ea7;
+        }
+        form label{
+            color:#ffffff;
         }
         .image-preview {
             margin-top: 10px;
@@ -141,9 +147,9 @@
         $sql->execute(['eventID' => $_GET['EventID']]);
         $dataa = $sql->fetch(PDO::FETCH_ASSOC);
         ?>
-        <h1>Edit Event</h1>
+        <h2>Edit Event</h2>
         <div class="card">
-            <form action="update.php" method="post">
+            <form action="update.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="EventID" value="<?php echo $dataa['EventID']; ?>" />
                 <label>Nama Event</label>
                 <input type="text" value="<?php echo htmlspecialchars($dataa['NamaEvent']); ?>" name="NamaEvent" required />
@@ -163,13 +169,30 @@
                 <label>Kapasitas</label>
                 <input type="number" value="<?php echo $dataa['Kapasitas']; ?>" name="Kapasitas" required />
                 <br />
-                <label>Foto</label>
-                <input type="file" value="<?php echo $dataa['Foto']; ?>" name="Foto" />
-                <br />
+                <label>Upload New Image</label>
+                <input type="file" name="Foto" id="fotoInput" accept="image/*">
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImage" src="" alt="New Image Preview">
+                </div>
+                <br/>
                 <button type="submit">Update</button>
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById('fotoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

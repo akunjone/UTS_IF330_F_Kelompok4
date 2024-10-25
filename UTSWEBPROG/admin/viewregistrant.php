@@ -67,9 +67,8 @@
             padding: 40px;
             text-align: center;
         }
-        h2 {
-            margin-top: 40px;
-            color: #333333;
+        .main-content h2{
+            color:#ffffff;
         }
         .table-style {
             width: 100%;
@@ -114,6 +113,8 @@
     </div>
 
     <div class="main-content">
+        <h2>View Registrant</h2>
+
         <table class="table-style">
             <thead>
                 <tr>
@@ -125,7 +126,6 @@
                     <th>Deskripsi</th>
                     <th>Kapasitas</th>
                     <th>Pendaftar</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>

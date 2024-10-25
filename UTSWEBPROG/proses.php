@@ -16,9 +16,11 @@ if (!empty($email) && !empty($password)) {
 
     if (mysqli_query($koneksi, $query)) {
         if ($role == 'us') {
-            header("Location: user/userhome.php");
+            //kalo rolenya user
+            header("Location: login.php");
         } else {
-            header("Location: admin/useradmin.php");
+            //kalo admin
+            header("Location: login.php");
         }
         exit();
     } else {
