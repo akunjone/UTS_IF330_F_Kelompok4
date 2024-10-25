@@ -48,8 +48,6 @@
         .card {
             background-color: #1b263b;
             border: 1px solid #45b6d6; 
-            width: 400px; 
-            margin: auto; 
         }
         .card-header {
             background-color: #45b6d6; 
@@ -100,11 +98,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" value="<?php echo htmlspecialchars($dataa['username']); ?>" required />
+                        <input type="text" name="username" class="form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label ">Email</label>
-                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($dataa['email']); ?>" required />
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
@@ -116,7 +114,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
