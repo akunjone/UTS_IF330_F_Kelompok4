@@ -72,6 +72,10 @@
         .card {
             background-color: #1b263b;
             border: 1px solid #45b6d6; 
+            width: 40%; 
+            max-width: 400px; 
+            margin: 0 auto; 
+            margin-bottom: 150px;
         }
         .card-header {
             background-color: #45b6d6; 
@@ -90,7 +94,7 @@
             <li><a href="useradmin.php">Home</a></li>
             <li><a href="eventmanagement.php">Event Management</a></li>
             <li><a href="viewregistrant.php">View Registrant</a></li>
-            <li><a href="usermanagement.php">User Management</a></li>
+            <li><a href="usermanagement.php">User  Management</a></li>
             <li><a href="viewevent.php">View All Events</a></li>
             <li class="dropdown">
                 <a href="#">Account</a>
@@ -144,6 +148,7 @@
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
