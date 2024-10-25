@@ -20,7 +20,7 @@ $display = mysqli_fetch_array($data);
     <title>Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel ="stylesheet" href="styleadmin.css">
+    <link rel="stylesheet" href="styleadmin.css">
     <style>
         * {
             margin: 0;
@@ -83,21 +83,45 @@ $display = mysqli_fetch_array($data);
             padding: 40px;
             text-align: center;
         }
-        .card {
-            margin: 15px;
+        .profile-card {
             background-color: #1b263b;
             color: #ffffff;
-            border: 1px solid #45b6d6;
             border-radius: 10px;
-        }
-        .card-body {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
             padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 100px;
         }
-        .card-title {
-            color: #00d9ff;
+        .profile-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
         }
-        .card-text {
-            margin-bottom: 10px;
+        .profile-card h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+        .profile-card p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #ffffff;
+        }
+        .profile-card .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .profile-card .btn-update {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
@@ -108,8 +132,8 @@ $display = mysqli_fetch_array($data);
             <ul>
                 <li><a href="useradmin.php">Home</a></li>
                 <li><a href="eventmanagement.php">Event Management</a></li>
-                <li><a href="viewregistrant.php">View Registrant</a></li>
-                <li><a href="usermanagement.php">User Management</a></li>
+                <li ><a href="viewregistrant.php">View Registrant</a></li>
+                <li><a href="usermanagement.php">User  Management</a></li>
                 <li><a href="viewevent.php">View All Events</a></li>
                 <li class="dropdown">
                     <a href="#">Account</a>
@@ -122,18 +146,12 @@ $display = mysqli_fetch_array($data);
         </div>
     </header>
     <div class="main-content container">
-        <h1 class="text-center mt-5">Admin Profile</h1>
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title"><?php echo htmlspecialchars($display['username']); ?></h5>
-                        <p class="card-text">Email: <?php echo htmlspecialchars($display['email']); ?></p>
-                        <p class="card-text">User ID: <?php echo htmlspecialchars($display['id']); ?></p>
-                        <a href='updateprofile.php?id=<?php echo htmlspecialchars($display['id']); ?>' class='btn btn-warning'>Update</a>
-                    </div>
-                </div>
-            </div>
+        <div class="profile-card">
+            <img src="https://img.myloview.com/posters/default-avatar-profile-flat-icon-social-media-user-vector-portrait-of-unknown-a-human-image-700-209987471.jpg" alt="Profile picture">
+            <h2><?php echo htmlspecialchars($display['username']); ?></h2>
+            <p>Email: <?php echo htmlspecialchars($display['email']); ?></p>
+            <p>User ID: <?php echo htmlspecialchars($display['id']); ?></p>
+            <a href='updateprofile.php?id=<?php echo htmlspecialchars($display['id']); ?>' class='btn btn-update'>Update Profile</a>
         </div>
     </div>
 
