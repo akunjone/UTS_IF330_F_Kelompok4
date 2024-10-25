@@ -8,8 +8,20 @@ if (!isset($_SESSION['id'])) {
 
 $koneksi = mysqli_connect("localhost", "root", "", "event");
 $id = $_SESSION['id'];
+
+//buat info user
 $data = mysqli_query($koneksi, "SELECT * FROM users WHERE id = '$id'");
 $display = mysqli_fetch_array($data);
+
+//buat event history
+$historyQuery = "
+    SELECT e.NamaEvent, e.Tanggal, e.Lokasi, rh.action, rh.Timestamp 
+    FROM registration_history rh
+    JOIN events e ON rh.EventID = e.EventID
+    WHERE rh.userID = '$id'
+    ORDER BY rh.Timestamp DESC
+";
+$historyResult = mysqli_query($koneksi, $historyQuery);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +68,7 @@ $display = mysqli_fetch_array($data);
             text-decoration: underline;
         }
         .content {
-            margin-top: 100px; /* Adjusted to account for fixed navbar */
+            margin-top: 100px;
             padding: 20px;
             width: 100%;
         }
@@ -65,7 +77,7 @@ $display = mysqli_fetch_array($data);
             background-color: #1b263b;
             color: #ffffff;
             border: 1px solid #45b6d6;
-            border-radius: 10px; /* Rounded corners */
+            border-radius: 10px;
         }
         .card-body {
             padding: 20px;
@@ -104,6 +116,33 @@ $display = mysqli_fetch_array($data);
                         <p class="card-text">User ID: <?php echo htmlspecialchars($display['id']); ?></p>
                         <a href='updateprofile.php?id=<?php echo htmlspecialchars($display['id']); ?>' class='btn btn-warning'>Update</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- buat history -->
+        <div class="event-history container mt-5">
+            <h3 class="text-center">Event Registration History</h3>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <?php
+                    if (mysqli_num_rows($historyResult) > 0) {
+                        while ($event = mysqli_fetch_array($historyResult)) {
+                            $status = ($event['action'] == 'registered') ? 'Registered' : 'Cancelled';
+                            echo "
+                            <div class='card event-card'>
+                                <div class='card-body'>
+                                    <h5 class='event-card-title'>{$event['NamaEvent']}</h5>
+                                    <p class='card-text'>Date: {$event['Tanggal']}</p>
+                                    <p class='card-text'>Location: {$event['Lokasi']}</p>
+                                    <p class='card-text'>Status: {$status}</p>
+                                    <p class='card-text'>Timestamp: {$event['Timestamp']}</p>
+                                </div>
+                            </div>";
+                        }
+                    } else {
+                        echo "<p class='text-center'>You have no event history yet.</p>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

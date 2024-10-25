@@ -29,3 +29,13 @@ CREATE TABLE regist (
     FOREIGN KEY (EventID) REFERENCES events(EventID) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE registration_history (
+    HistoryID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    EventID INT NOT NULL,
+    action ENUM('registered', 'cancelled') NOT NULL,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (EventID) REFERENCES events(EventID) ON DELETE CASCADE
+);

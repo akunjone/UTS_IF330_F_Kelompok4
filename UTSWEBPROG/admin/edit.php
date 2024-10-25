@@ -2,44 +2,69 @@
 <html>
 <head>
     <title>Edit Event</title>
-    <link rel="stylesheet" href="../admin/styleadmin.css">
+    <link rel="stylesheet" href="styleadmin.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            display: flex;
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
             background-color: #0d1b2a;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
         }
-        .NavbarComponents {
-            width: 100%;
+        .navbar {
             background-color: #1b263b;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            position: fixed; 
-            top: 0;
-            left: 0;
-            z-index: 1000; 
+            padding: 15px 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .NavbarSymbol {
-            display: inline-block;
+        .navbar h1 {
             font-size: 24px;
+            margin: 0;
             color: #00d9ff;
         }
-        .NavbarMenu {
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .navbar a {
             color: #ffffff;
             text-decoration: none;
-            margin: 0 15px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .navbar a:hover {
+            background-color: #45b6d6;
+            border-radius: 5px;
+        }
+        .navbar .dropdown {
+            position: relative;
             display: inline-block;
         }
-        .NavbarMenu:hover {
-            text-decoration: underline;
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1b263b;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
-        .content {
-            margin-top: 150px;
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .navbar .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+        }
+        .main-content {
+            padding: 40px;
             text-align: center;
         }
         .card {
@@ -82,20 +107,29 @@
             border-radius: 5px;
         }
     </style>
+    
 </head>
-    <nav class="NavbarComponents">
-        <h1 class="NavbarSymbol">Madevent</h1>
+<header>
+   <div class="navbar">
+        <h1>Madevent Admin</h1>
         <ul>
-            <li><a class="NavbarMenu" href="../admin/useradmin.php">Home</a></li>
-            <li><a class="NavbarMenu" href="../admin/eventmanagement.php">Event Management</a></li>
-            <li><a class="NavbarMenu" href="../admin/viewregistrant.php">View Registrant</a></li>
-            <li><a class="NavbarMenu" href="../admin/usermanagement.php">User Management</a></li>
-            <li><a class="NavbarMenu" href="../admin/viewevent.php">View All Event</a></li>
-            <li><a class="NavbarMenu" href="../admin/logout.php">Logout</a></li>     
+            <li><a href="useradmin.php">Home</a></li>
+            <li><a href="eventmanagement.php">Event Management</a></li>
+            <li><a href="viewregistrant.php">View Registrant</a></li>
+            <li><a href="usermanagement.php">User Management</a></li>
+            <li><a href="viewevent.php">View All Events</a></li>
+            <li class="dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-content">
+                    <a href="profile.php">Profile</a>
+                    <a href="logout.php">Logout</a>
+                </div>
+            </li>
         </ul>
-    </nav>
+    </div>
+</header>
     <body>
-        <div class="content">
+        <div class="main-content">
         <?php
         $koneksi = new PDO('mysql:host=localhost;dbname=event', 'root', '');
 
@@ -109,32 +143,34 @@
         ?>
         <h1>Edit Event</h1>
         <div class="card">
-        <form action="update.php" method="post">
-            <input type="hidden" name="EventID" value="<?php echo $dataa['EventID']; ?>" />
-            <label>Nama Event</label>
-            <input type="text" value="<?php echo htmlspecialchars($dataa['NamaEvent']); ?>" name="NamaEvent" required />
-            <br />
-            <label>Tanggal</label>
-            <input type="date" value="<?php echo $dataa['Tanggal']; ?>" name="Tanggal" required />
-            <br />
-            <label>Waktu</label>
-            <input type="time" value="<?php echo $dataa['Waktu']; ?>" name="Waktu" required />
-            <br />
-            <label>Lokasi</label>
-            <input type="text" value="<?php echo htmlspecialchars($dataa['Lokasi']); ?>" name="Lokasi" required />
-            <br />
-            <label>Deskripsi</label>
-            <textarea name="Deskripsi" required><?php echo htmlspecialchars($dataa['Deskripsi']); ?></textarea>
-            <br />
-            <label>Kapasitas</label>
-            <input type="number" value="<?php echo $dataa['Kapasitas']; ?>" name="Kapasitas" required />
-            <br />
-            <label>Foto</label>
-            <input type="file" value="<?php echo $dataa['Foto']; ?>" name="Foto" />
-            <br />
-            <button type="submit">Update</button>
-        </form>
+            <form action="update.php" method="post">
+                <input type="hidden" name="EventID" value="<?php echo $dataa['EventID']; ?>" />
+                <label>Nama Event</label>
+                <input type="text" value="<?php echo htmlspecialchars($dataa['NamaEvent']); ?>" name="NamaEvent" required />
+                <br />
+                <label>Tanggal</label>
+                <input type="date" value="<?php echo $dataa['Tanggal']; ?>" name="Tanggal" required />
+                <br />
+                <label>Waktu</label>
+                <input type="time" value="<?php echo $dataa['Waktu']; ?>" name="Waktu" required />
+                <br />
+                <label>Lokasi</label>
+                <input type="text" value="<?php echo htmlspecialchars($dataa['Lokasi']); ?>" name="Lokasi" required />
+                <br />
+                <label>Deskripsi</label>
+                <textarea name="Deskripsi" required><?php echo htmlspecialchars($dataa['Deskripsi']); ?></textarea>
+                <br />
+                <label>Kapasitas</label>
+                <input type="number" value="<?php echo $dataa['Kapasitas']; ?>" name="Kapasitas" required />
+                <br />
+                <label>Foto</label>
+                <input type="file" value="<?php echo $dataa['Foto']; ?>" name="Foto" />
+                <br />
+                <button type="submit">Update</button>
+            </form>
+        </div>
     </div>
-    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

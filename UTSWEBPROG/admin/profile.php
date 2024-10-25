@@ -20,16 +20,16 @@ $display = mysqli_fetch_array($data);
     <title>Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel ="stylesheet" href="styleadmin.css">
     <style>
-        body {
-            display: flex;
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
             background-color: #0d1b2a;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
         }
         .navbar {
             background-color: #1b263b;
@@ -79,10 +79,9 @@ $display = mysqli_fetch_array($data);
             padding: 12px 16px;
             display: block;
         }
-        .content {
-            margin-top: 100px;
-            padding: 20px;
-            width: 100%;
+        .main-content {
+            padding: 40px;
+            text-align: center;
         }
         .card {
             margin: 15px;
@@ -103,28 +102,27 @@ $display = mysqli_fetch_array($data);
     </style>
 </head>
 <body>
-<header>
-   <div class="navbar">
-        <h1>Madevent Admin</h1>
-        <ul>
-            <li><a href="useradmin.php">Home</a></li>
-            <li><a href="eventmanagement.php">Event Management</a></li>
-            <li><a href="viewregistrant.php">View Registrant</a></li>
-            <li><a href="usermanagement.php">User Management</a></li>
-            <li><a href="viewevent.php">View All Events</a></li>
-            <li class="dropdown">
-                <a href="#">Account</a>
-                <div class="dropdown-content">
-                    <a href="profile.php">Profile</a>
-                    <a href="logout.php">Logout</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</header>
-
-    <div class="content container">
-        <h1 class="text-center mt-5">User Profile</h1>
+    <header>
+        <div class="navbar">
+            <h1>Madevent Admin</h1>
+            <ul>
+                <li><a href="useradmin.php">Home</a></li>
+                <li><a href="eventmanagement.php">Event Management</a></li>
+                <li><a href="viewregistrant.php">View Registrant</a></li>
+                <li><a href="usermanagement.php">User Management</a></li>
+                <li><a href="viewevent.php">View All Events</a></li>
+                <li class="dropdown">
+                    <a href="#">Account</a>
+                    <div class="dropdown-content">
+                        <a href="profile.php">Profile</a>
+                        <a href="logout.php">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="main-content container">
+        <h1 class="text-center mt-5">Admin Profile</h1>
         <div class="row justify-content-center mt-4">
             <div class="col-md-6">
                 <div class="card">
